@@ -1,6 +1,6 @@
 import React from 'react'
 import {MdOutlineDeleteOutline, MdEditNote, MdOutlineCheckBoxOutlineBlank, MdOutlineCheckBox} from 'react-icons/md'
-import axios from 'axios'
+import {axios from 'axios'
 const Table = ({todos, setTodos, isLoading, fetchData}) => {
 
     const handleDelete = async (id) => {
@@ -9,6 +9,16 @@ const Table = ({todos, setTodos, isLoading, fetchData}) => {
             // const newList = todos.filter(todo => todo.id !== id)
             // setTodos(newList)
             fetchData()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleEdit = async (id, value) => {
+        try{
+            const response = await.patch(`http://127.0.0.1:8000/api/todo/${id}`,value)
+            const newTodos = todos.map
+
         } catch (error) {
             console.log(error)
         }
