@@ -1,0 +1,5 @@
+go to env/pyvenv
+
+search on system for python folder last time it was on the root of C:
+
+replace every location of ython with the new location
