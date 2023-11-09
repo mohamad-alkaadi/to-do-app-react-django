@@ -33,7 +33,7 @@ const TodoForm = ({setTodos, fetchData}) => {
         if (e.key === "Enter"){
           postTodo()
       }}}/>
-      <button className="btn btn-primary ml-2" onClick={postTodo}>Primary</button>
+      <button className="btn btn-primary ml-2" onClick={postTodo}>Add</button>
     </div>
   )
 }
