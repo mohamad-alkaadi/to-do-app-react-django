@@ -1,18 +1,21 @@
 import React from 'react'
 import { AiOutlineClose } from 'react-icons/ai';
 
-const NoteOverview = ({noteItem, handleDelete}) => {
+const NoteOverview = ({noteItem, handleDelete, handleClick}) => {
   return (
-    <div className="border border-black">
+    <button onClick={() => handleClick(noteItem.id, noteItem.title, noteItem.content)} className="border border-black cursor-pointer">
         <div className='flex justify-between'>
           <div>Title:</div>
-          <AiOutlineClose onClick={() => handleDelete()}/>
+          <AiOutlineClose className="cursor-pointer" onClick={() => handleDelete(noteItem.id)}/>
         </div>
-        <div>Title</div>
+        <div className='text-left'>{noteItem.title}</div>
         {/* if date created is not equal to updated show updated*/}
-        <div>dateCreate:</div>
-        <div>22/2/2023</div>
-    </div>
+        {noteItem.updated === noteItem.created ? (
+        <div className='text-left'>Created: <br/>{new Date(noteItem.created).toLocaleString()}</div>
+      ) : (
+        <div className='text-left'>Updated: <br/>{new Date(noteItem.updated).toLocaleString()}</div>
+      )}
+    </button>
   )
 }
 
