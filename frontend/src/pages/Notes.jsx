@@ -9,12 +9,20 @@ const Notes = () => {
   const [noteTitle, setNoteTitle] = useState("")
   const [noteContent, setNoteContent] = useState("")
   const [noteId, setNoteId] = useState(0)
+  const [noteLastId, setNoteLastId] = useState(0)
 
+  const handleClose = () =>{
+    setNoteTitle("");
+    setNoteContent("");
+    setNoteId(0);
+  }
   const fetchData = async () => {
     try{
       const response = await axios.get("http://127.0.0.1:8000/api/notes/")
       setNotes(response.data)
       setIsLoading(false)
+      const lastId = response.data.length
+      setNoteLastId(lastId) //the number of id's is not equal to the last id because it does not decrease when we delete a note
     } catch(error){
       console.log(error)
     }
@@ -50,14 +58,14 @@ const Notes = () => {
         { isLoading ? <div>Is Loading</div> : (
           <>
             {notes.map((noteItem, index) => (
-              <NoteOverview key={index} noteItem={noteItem} handleDelete={handleDelete} handleClick={handleClick}/>
+              <NoteOverview handleClose={handleClose} key={index} noteItem={noteItem} handleClick={handleClick}/>
             ))}
           </>)
         }
 
       </div>
       <div className='bg-red-200 h-full'>
-        <NotesForm fetchData={fetchData} noteId={noteId} noteTitle={noteTitle} noteContent={noteContent} handleDelete={handleDelete} setNoteTitle={setNoteTitle} setNoteContent={setNoteContent}/>
+        <NotesForm handleClose={handleClose} noteLastId={noteLastId} handleClick={handleClick} fetchData={fetchData} noteId={noteId} noteTitle={noteTitle} noteContent={noteContent} handleDelete={handleDelete} setNoteTitle={setNoteTitle} setNoteContent={setNoteContent}/>
       </div>
     </div>
   )
